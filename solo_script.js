@@ -16,7 +16,7 @@ position = document.getElementById('content');
 //Loop the array, extracting each array and writing information to the DOM
 //Note that the information is not 'clean'
 for(var i = 0; i < array.length; i++){
-	array[i] = calculateSTI(array);
+	array[i] = calculateSTI(array[i]);     //b1
  	newEl = document.createElement('li');
 	newText = document.createTextNode(array[i]);
 	newEl.appendChild(newText);
@@ -38,8 +38,8 @@ function calculateSTI(array){
   }
 
   newArray[1] = bonus; // percentage of STI employee to receive
-  newArray[2] = baseSalary * (1.0 + bonus); // adjusted annual compensation
-  newArray[3] = baseSalary * bonus; //total bonus rounded to nearest dollar
+  newArray[2] = Math.round(baseSalary * (1.0 + bonus)); // adjusted annual compensation		//b3?
+  newArray[3] = Math.round(baseSalary * bonus); //total bonus rounded to nearest dollar   //b3?
   console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
   return newArray;
 }
@@ -63,7 +63,8 @@ function getBaseSTI(reviewScore){
       basePercent = 0.10;
       break;
   }
-  return basePercent - 1;
+
+  return basePercent; //b2
 }
 
 function getYearAdjustment(employeeNumber){
@@ -71,6 +72,7 @@ function getYearAdjustment(employeeNumber){
   if(employeeNumber.length == 4){
     yearAdjustment = 0.05;
   }
+	// console.log(yearAdjustment);
   return yearAdjustment;
 }
 
@@ -80,5 +82,6 @@ function getIncomeAdjustment(salary){
   if(salary > 65000){
     incomeAdjustment = 0.01;
   }
+	// console.log(incomeAdjustment);
   return incomeAdjustment;
 }
